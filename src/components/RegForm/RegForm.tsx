@@ -17,11 +17,14 @@ const RegForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register('name')} className="mr-2 border" type="text" />
+      <label htmlFor="name">Name</label>
+      <input {...register('name')} id="name" className="mr-2 border" type="text" />
       {errors.name && <span className="text-xs text-red-400">{errors.name.message}</span>}
-      <input {...register('email')} className="mr-2 border" type="email" />
+      <label htmlFor="email">Email</label>
+      <input {...register('email')} id="email" className="mr-2 border" type="email" />
       {errors.email && <span className="text-xs text-red-400">{errors.email.message}</span>}
-      <input {...register('password')} className="mr-2 border" type="password" />
+      <label htmlFor="password">Password</label>
+      <input {...register('password')} id="password" className="mr-2 border" type="password" />
       {errors.password && <span className="text-xs text-red-400">{errors.password.message}</span>}
       <button>Register</button>
     </form>
