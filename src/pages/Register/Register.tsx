@@ -1,5 +1,11 @@
+import RegForm from '../../components/RegForm/RegForm';
+
 const Register = () => {
-  return <div>reg</div>;
+  return (
+    <>
+      <RegForm />
+    </>
+  );
 };
 
 export default Register;
