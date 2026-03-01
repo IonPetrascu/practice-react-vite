@@ -1,11 +1,7 @@
 import RegForm from '../../components/RegForm/RegForm';
 
 const Register = () => {
-  return (
-    <>
-      <RegForm />
-    </>
-  );
+  return <RegForm />;
 };
 
 export default Register;
