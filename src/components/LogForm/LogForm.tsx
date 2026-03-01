@@ -11,6 +11,7 @@ const LoginForm = () => {
   } = useForm<Inputs>({ resolver: zodResolver(loginSchema) });
 
   const onSubmit: SubmitHandler<Inputs> = (data: LoginFormValues) => {
+    // eslint-disable-next-line no-console
     console.log(data);
   };
 

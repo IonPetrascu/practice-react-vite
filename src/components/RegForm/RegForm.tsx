@@ -11,6 +11,7 @@ const RegForm = () => {
   } = useForm<Inputs>({ resolver: zodResolver(registerSchema) });
 
   const onSubmit: SubmitHandler<Inputs> = (data: RegisterFormValues) => {
+    // eslint-disable-next-line no-console
     console.log(data);
   };
 
