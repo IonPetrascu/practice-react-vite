@@ -51,8 +51,7 @@
   "lint-staged": {
     "*.{js,jsx,tsx,ts}": [
       "yarn lint",
-      "yarn format",
-      "git add"
+      "yarn format"
     ],
     "*.{css,md,json}": [
       "yarn format"
