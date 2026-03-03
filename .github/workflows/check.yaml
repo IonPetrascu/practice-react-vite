@@ -20,6 +20,13 @@ jobs:
     needs: [lint]
     runs-on: [self-hosted, Linux, X64]
     steps:
+      - name: Debug Node env
+        run: |
+          echo $PATH
+          which node
+          which npm
+          node -v
+          npm -v
       - name: Checkout
         uses: actions/checkout@v3
 
