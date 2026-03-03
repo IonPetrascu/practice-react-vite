@@ -15,8 +15,8 @@ jobs:
 
       - name: Prepare & install
         run: |
-          rm -rf node_modules package-lock.json
-          npm ci                      # ci лучше install, если lock-файл есть/должен быть
+          rm -rf node_modules package-lock.json   # ← чистим, чтобы установка была свежей
+          npm install                             # ← вместо npm ci
 
       - name: Lint
         run: npm run lint
@@ -33,18 +33,10 @@ jobs:
           node-version: 24
           cache: 'npm'
 
-      - name: Debug (для проверки)
-        run: |
-          echo "PATH: $PATH"
-          which node || echo "node not found"
-          which npm  || echo "npm not found"
-          node -v
-          npm -v
-
       - name: Prepare & install
         run: |
           rm -rf node_modules package-lock.json
-          npm ci
+          npm install
 
       - name: Test
         run: npm run test
