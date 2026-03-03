@@ -8,14 +8,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Setup Node 20
-        run: |
-          source ~/.nvm/nvm.sh
-          nvm install 20
-          nvm use 20
-          node -v
-          npm -v
-
       - name: Prepare Node Modules
         run: |
           rm -rf node_modules package-lock.json
@@ -30,11 +22,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
-      - name: Setup Node 20
-        run: |
-          source ~/.nvm/nvm.sh
-          nvm use 20
 
       - name: Prepare Node Modules
         run: |
