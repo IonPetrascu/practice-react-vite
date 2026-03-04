@@ -1,48 +1,42 @@
-name: Check
-on: push
+name: CI/CD
+on:
+  push:
+    branches:
+      - dev
+      - master
 
 jobs:
   lint:
     runs-on: [self-hosted, Linux, X64]
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: 'npm'
-
-      - name: Prepare & install
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install
-
+      - name: Install
+        run: npm ci
       - name: Lint
         run: npm run lint
 
   test:
-    needs: [lint]
+    needs: lint
     runs-on: [self-hosted, Linux, X64]
     steps:
       - uses: actions/checkout@v4
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: 'npm'
-
-      - name: Prepare & install
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install
-
+      - name: Install
+        run: npm ci
       - name: Test
         run: npm run test
 
-  build:
-    needs: [test]
+  deploy:
+    needs: test
     runs-on: [self-hosted, Linux, X64]
     if: github.ref == 'refs/heads/master'
     steps:
@@ -50,14 +44,14 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version: 20
           cache: 'npm'
       - name: Install
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Deploy
         run: |
-            sudo rm -rf /var/www/dist_old
-            sudo mv /var/www/dist /var/www/dist_old || true
-            sudo mv dist /var/www/dist
+          sudo rm -rf /var/www/dist_old
+          sudo mv /var/www/dist /var/www/dist_old || true
+          sudo mv dist /var/www/dist
