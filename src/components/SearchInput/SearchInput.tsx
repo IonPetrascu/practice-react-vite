@@ -11,7 +11,9 @@ const SearchInput = () => {
     console.log('search!!!!');
   }, [debouncedValue]);
 
-  return <input onChange={(e) => setValue(e.target.value)} placeholder="search" />;
+  return (
+    <input className="bg-red-400" onChange={(e) => setValue(e.target.value)} placeholder="search" />
+  );
 };
 
 export default SearchInput;
