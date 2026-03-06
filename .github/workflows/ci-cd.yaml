@@ -41,17 +41,10 @@ jobs:
     if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-      - name: Install
-        run: npm ci
-      - name: Build
-        run: npm run build
+      - name: Build Docker image
+        run: docker build -t frontend .
       - name: Deploy
         run: |
-          sudo rm -rf /var/www/dist_old
-          sudo mv /var/www/dist /var/www/dist_old || true
-          sudo mv dist /var/www/dist
+          docker stop frontend || true
+          docker rm frontend || true
+          docker run -d --name frontend -p 80:80 frontend
