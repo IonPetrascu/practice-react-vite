@@ -2,31 +2,33 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { registerSchema } from './schema';
 import type { RegisterFormValues } from './types';
+import { authService } from '../../services/auth.service';
+import { useAuthStore } from '../../store/authStore';
 
 const RegForm = () => {
   const {
     handleSubmit,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<RegisterFormValues>({ resolver: zodResolver(registerSchema) });
+  const { setUser } = useAuthStore();
 
   const onSubmit: SubmitHandler<RegisterFormValues> = (data) => {
-    // eslint-disable-next-line no-console
-    console.log(data);
+    return authService
+      .register(data)
+      .then(setUser)
+      .catch(() => setUser(null));
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="name">Name</label>
-      <input {...register('name')} id="name" className="mr-2 border" type="text" />
-      {errors.name && <span className="text-xs text-red-400">{errors.name.message}</span>}
       <label htmlFor="email">Email</label>
       <input {...register('email')} id="email" className="mr-2 border" type="email" />
       {errors.email && <span className="text-xs text-red-400">{errors.email.message}</span>}
       <label htmlFor="password">Password</label>
       <input {...register('password')} id="password" className="mr-2 border" type="password" />
       {errors.password && <span className="text-xs text-red-400">{errors.password.message}</span>}
-      <button>Register</button>
+      <button disabled={isSubmitting}>{isSubmitting ? 'Loading...' : 'Register'}</button>
     </form>
   );
 };

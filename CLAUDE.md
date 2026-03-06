@@ -12,15 +12,18 @@ A React practice project built with Vite and TypeScript. The goal is to learn an
 
 ## Tech Stack
 
-| Layer      | Technology                   |
-| ---------- | ---------------------------- |
-| Framework  | React 19                     |
-| Build tool | Vite 7                       |
-| Language   | TypeScript 5.9 (strict mode) |
-| Styling    | Tailwind CSS v4              |
-| Linting    | ESLint 9 (flat config)       |
-| Formatting | Prettier 3                   |
-| Git hooks  | Husky + lint-staged          |
+| Layer      | Technology                    |
+| ---------- | ----------------------------- |
+| Framework  | React 19                      |
+| Build tool | Vite 7                        |
+| Language   | TypeScript 5.9 (strict mode)  |
+| Styling    | Tailwind CSS v4               |
+| Linting    | ESLint 9 (flat config)        |
+| Formatting | Prettier 3                    |
+| Git hooks  | Husky + lint-staged           |
+| State      | Zustand (with devtools)       |
+| Forms      | React Hook Form + Zod         |
+| HTTP       | Axios (withCredentials: true) |
 
 ## Scripts
 
@@ -73,12 +76,14 @@ npm run preview      # Preview production build
 
 ```
 src/
+  app/              # Router, providers, ProtectedRoute, PublicRoute
   components/       # Reusable UI components
     ui/             # Base primitives (Button, Input, Modal...)
+  layouts/          # Layout components (MainLayout, AuthLayout)
   pages/            # Route-level page components
   features/         # Feature-specific logic and components
   hooks/            # Custom React hooks
-  lib/              # Third-party config (axios instance, queryClient)
+  lib/              # Third-party config (axiosInstance, apiRoutes)
   services/         # API call functions grouped by domain
   types/            # Shared TypeScript types and interfaces
   utils/            # Pure utility functions
@@ -112,6 +117,13 @@ All Vite env vars must start with `VITE_` to be accessible in the browser.
 - Pre-commit hook runs `lint-staged`: ESLint + Prettier on staged files
 - Commit messages should be descriptive
 - Never bypass hooks with `--no-verify` unless absolutely necessary
+
+---
+
+## Auth Architecture
+
+- Session-based auth via cookie (`connect.sid`) — бэкенд на Express
+- `axiosInstance` имеет `withCredentials: true` — обязательно для передачи cookie
 
 ---
 

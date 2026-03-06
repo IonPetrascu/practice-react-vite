@@ -7,4 +7,10 @@ export const API = {
     BASE: build('/notes'),
     BY_ID: (id: number) => build(`/notes/${id}`),
   },
+  AUTH: {
+    REGISTER: build('/auth/register'),
+    LOGIN: build('/auth/login'),
+    LOGOUT: build('/auth/logout'),
+    ME: build('/auth/me'),
+  },
 };
