@@ -6,6 +6,8 @@ import Login from '../pages/Login/Login';
 import Register from '../pages/Register/Register';
 import ProtectedRoute from './ProtectedRoute';
 import PublicRoute from './PublicRoute';
+import Board from '../pages/Board/Board';
+import Boards from '../pages/Boards/Boards';
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +18,11 @@ export const router = createBrowserRouter([
         children: [
           {
             Component: MainLayout,
-            children: [{ index: true, Component: Home }],
+            children: [
+              { index: true, Component: Home },
+              { path: 'boards', Component: Boards },
+              { path: 'boards/:id', Component: Board },
+            ],
           },
         ],
       },

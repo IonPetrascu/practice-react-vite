@@ -3,6 +3,7 @@ import { router } from './routes';
 import { useEffect } from 'react';
 import { authService } from '../services/auth.service';
 import { useAuthStore } from '../store/authStore';
+import { Toaster } from 'sonner';
 
 const Providers = () => {
   const { setUser, setLoading } = useAuthStore();
@@ -15,7 +16,12 @@ const Providers = () => {
       .finally(() => setLoading(false));
   }, [setUser, setLoading]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <Toaster richColors position="top-right" />
+      <RouterProvider router={router} />
+    </>
+  );
 };
 
 export default Providers;

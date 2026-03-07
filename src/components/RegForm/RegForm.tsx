@@ -4,6 +4,7 @@ import { registerSchema } from './schema';
 import type { RegisterFormValues } from './types';
 import { authService } from '../../services/auth.service';
 import { useAuthStore } from '../../store/authStore';
+import { toast } from 'sonner';
 
 const RegForm = () => {
   const {
@@ -16,8 +17,14 @@ const RegForm = () => {
   const onSubmit: SubmitHandler<RegisterFormValues> = (data) => {
     return authService
       .register(data)
-      .then(setUser)
-      .catch(() => setUser(null));
+      .then((user) => {
+        setUser(user);
+        toast.success('Аккаунт создан');
+      })
+      .catch(() => {
+        setUser(null);
+        toast.error('Не удалось зарегистрироваться');
+      });
   };
 
   return (

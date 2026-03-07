@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { notesService } from '../../services/notes.service';
 import type { Note } from '../../types/note';
+import { NavLink } from 'react-router';
 
 const Home = () => {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -12,6 +13,9 @@ const Home = () => {
 
   return (
     <div>
+      <NavLink to="/boards" className="text-blue-500 hover:underline">
+        Boards
+      </NavLink>
       <SearchInput />
       <ul>
         {notes.map((note) => (

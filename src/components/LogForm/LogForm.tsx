@@ -4,6 +4,8 @@ import { loginSchema } from './schema';
 import type { LoginFormValues } from './types';
 import { authService } from '../../services/auth.service';
 import { useAuthStore } from '../../store/authStore';
+import { toast } from 'sonner';
+
 const LoginForm = () => {
   const {
     handleSubmit,
@@ -14,8 +16,14 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<LoginFormValues> = (data) => {
     return authService
       .login(data)
-      .then(setUser)
-      .catch(() => setUser(null));
+      .then((user) => {
+        setUser(user);
+        toast.success('Вы вошли в систему');
+      })
+      .catch(() => {
+        setUser(null);
+        toast.error('Неверный email или пароль');
+      });
   };
 
   return (
