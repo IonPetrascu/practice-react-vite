@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { authService } from '../services/auth.service';
 import { useAuthStore } from '../store/authStore';
 import { Toaster } from 'sonner';
+import { TooltipProvider } from '@/components/ui/tooltip';
 
 const Providers = () => {
   const { setUser, setLoading } = useAuthStore();
@@ -17,10 +18,10 @@ const Providers = () => {
   }, [setUser, setLoading]);
 
   return (
-    <>
+    <TooltipProvider>
       <Toaster richColors position="top-right" />
       <RouterProvider router={router} />
-    </>
+    </TooltipProvider>
   );
 };
 
