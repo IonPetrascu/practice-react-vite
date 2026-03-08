@@ -27,19 +27,19 @@ const BoardForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-1.5">
       <div className="flex gap-2">
         <input
           {...register('title')}
           id="title"
-          placeholder="New board name..."
-          className="min-w-0 flex-1 rounded-md border border-gray-300 bg-white px-3 py-2 text-sm outline-none placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          placeholder="Название новой доски..."
+          className="min-w-0 flex-1 rounded-md border border-zinc-700 bg-zinc-950 px-3 py-2 text-sm text-white transition outline-none placeholder:text-zinc-500 focus:border-zinc-500 focus:ring-2 focus:ring-zinc-500/20"
         />
         <button
           disabled={isSubmitting}
-          className="flex cursor-pointer items-center gap-1 rounded-md bg-blue-500 px-4 py-2 text-sm font-medium whitespace-nowrap text-white transition-colors hover:bg-blue-600 disabled:opacity-50"
+          className="rounded-md bg-white px-4 py-2 text-sm font-medium whitespace-nowrap text-zinc-950 transition hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isSubmitting ? 'Creating...' : '+ Create board'}
+          {isSubmitting ? 'Создание...' : '+ Создать'}
         </button>
       </div>
       {errors.title && <span className="text-xs text-red-400">{errors.title.message}</span>}

@@ -1,20 +1,9 @@
 import { useDroppable } from '@dnd-kit/react';
 import { CollisionPriority } from '@dnd-kit/abstract';
 import { useSortable } from '@dnd-kit/react/sortable';
-import CardForm from './CardForm/CardForm';
-import type { Card } from '../types/board';
+import CardForm from '@/components/CardForm/CardForm';
 import ColumnHeader from './ColumnHeader';
-
-type Props = {
-  children: React.ReactNode;
-  id: string;
-  index: number;
-  title: string;
-  boardId: number;
-  cardCount: number;
-  onCardCreated: (card: Card) => void;
-  onDelete: () => void;
-};
+import type { ColumnProps } from './types';
 
 export default function Column({
   children,
@@ -25,14 +14,14 @@ export default function Column({
   onCardCreated,
   onDelete,
   cardCount,
-}: Props) {
+}: ColumnProps) {
   const { isDropTarget, ref: droppableRef } = useDroppable({
     id,
     type: 'column',
     accept: 'item',
     collisionPriority: CollisionPriority.Low,
   });
-  const style = isDropTarget ? { background: '#00000030' } : undefined;
+
   const { ref: sortableRef } = useSortable({
     id,
     index,
@@ -43,15 +32,16 @@ export default function Column({
 
   return (
     <div
-      className="flex min-h-20 w-62.5 min-w-62.5 flex-col gap-6"
+      className={`flex w-64 min-w-64 flex-col gap-2 rounded-xl border p-3 transition-colors ${
+        isDropTarget ? 'border-zinc-600 bg-zinc-800/80' : 'border-zinc-800 bg-zinc-900'
+      }`}
       ref={(node) => {
         droppableRef(node);
         sortableRef(node);
       }}
-      style={style}
     >
       <ColumnHeader title={title} onDelete={onDelete} cardCount={cardCount} />
-      {children}
+      <div className="flex flex-col gap-2">{children}</div>
       <CardForm
         boardId={boardId}
         columnId={Number(id.replace('col-', ''))}

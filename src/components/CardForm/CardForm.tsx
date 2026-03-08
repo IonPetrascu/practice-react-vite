@@ -28,19 +28,18 @@ const CardForm = ({ boardId, columnId, onSuccess }: Props) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mt-auto flex flex-col gap-1">
-      <div className="flex gap-2">
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-1 flex flex-col gap-1">
+      <div className="flex gap-1.5">
         <input
           {...register('title')}
-          placeholder="Add a card..."
-          className="min-w-0 flex-1 rounded-md border border-[#606b80] bg-white px-3 py-1.5 text-sm outline-none placeholder:text-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+          placeholder="Добавить карточку..."
+          className="min-w-0 flex-1 rounded-md border border-zinc-700 bg-zinc-950 px-2.5 py-1.5 text-xs text-white transition outline-none placeholder:text-zinc-500 focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500/20"
         />
         <button
           disabled={isSubmitting}
-          className="flex cursor-pointer items-center gap-1 rounded-md bg-blue-500 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-600 disabled:opacity-50"
+          className="flex cursor-pointer items-center justify-center rounded-md border border-zinc-700 bg-zinc-800 px-2 py-1.5 text-zinc-300 transition hover:bg-zinc-700 hover:text-white disabled:opacity-50"
         >
           <Plus size={14} />
-          {isSubmitting ? 'Adding...' : 'Add'}
         </button>
       </div>
       {errors.title && <span className="text-xs text-red-400">{errors.title.message}</span>}
